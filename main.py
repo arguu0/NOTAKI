@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
+from typing import Annotated
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import create_engine, Session, select, SQLModel, Field
@@ -15,7 +16,7 @@ app.add_middleware(
 )
 
 class Note(BaseModel):
-    note : str
+    note : Annotated[str | None, Query(min_length=1, max_length=200)] = None
 
 class Notes(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True) 
@@ -52,6 +53,7 @@ def display_note():
         statement = select(Notes)
         results = session.exec(statement)
         note = results.all()
+        return note
     
 #PUT method for updating 
 @app.put("/notes/{id}")
