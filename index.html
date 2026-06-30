@@ -126,7 +126,7 @@
 
         .note-input1::placeholder { color: var(--text-muted); }
 
-        .char-count {
+        .word-count {
             font-size: 0.75rem;
             color: var(--text-muted);
             text-align: right;
@@ -286,8 +286,11 @@
             <p class="panel-label">New Note</p>
 
             <textarea id="note-input" class="note-input1" placeholder="Write your note here..."></textarea>
+            <div class="word-count"> 
+                <span id="counter">0</span>/100 Words
+            </div>
 
-            <div class="btn-submit mt-3">
+            <div class="btn-submit">
                 <button id="save-btn" type="button">Save Note</button>
             </div>
         </div>
@@ -307,3 +310,4 @@
 
 </body>
 </html>
+
