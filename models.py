@@ -29,3 +29,8 @@ class Notes(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True) 
     note: str     # can be set Field(index=True) for easier filter when using .where()
     time: str 
+
+class User(BaseModel):
+    username: str
+    email: str
+    password: str

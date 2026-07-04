@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session, select
-from models import Note, Notes
+from models import Note, Notes, User
 from database import create_db, engine
 import time
 
@@ -63,3 +63,6 @@ def del_note(id: int):
         session.commit()
         return f"deleted note: {note.note}"
     
+@app.post('/register')
+async def register_user(user: User):
+    return user
