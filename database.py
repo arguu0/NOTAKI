@@ -17,8 +17,20 @@ def fetch_note(session: Session, id: int):
     result = session.exec(statement)
     return result.one()
 
-def get_user_pwd(user, session: Session):
-    statement = select(Users.password).where(Users.email == user.email)
+def get_target_id(session: Session, type_email):
+    statement = select(Users.id).where(Users.email == type_email)
+    user_id = session.exec(statement).first()
+    return user_id
+
+def get_target_detail(session: Session, type_username, type_email):
+    statement = select(Users.username, Users.email).where(Users.username == type_username and Users.email == type_email)
+    user_data = session.exec(statement).first()
+    if user_data:
+        return True
+    return False
+
+def get_user_pwd(type_email, session: Session):
+    statement = select(Users.password).where(Users.email == type_email)
     h_pwd = session.exec(statement).first()
     return h_pwd
 

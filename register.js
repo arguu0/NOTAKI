@@ -9,6 +9,10 @@ document.getElementById('register-btn').addEventListener('click', async (event) 
         const error = document.getElementById('signup-error');
         error.style.display = "block";
         error.innerHTML = "Passwords do not match. Please try again."
+        setTimeout(() => {
+            error.style.display = "None";
+            error.innerHTML = ""
+        }, 3000);
     } else {
         await register(event)
     }
@@ -26,4 +30,10 @@ async function register(event) {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(formdata)
     })
+    if (!response.ok) {
+        const data = await response.json()
+        alert(data.detail)
+    } else {
+        alert("Account Created")
+    }
 }

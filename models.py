@@ -22,13 +22,19 @@ def empty_note_check(v: str) -> str:
         raise PydanticCustomError("empty_note","Note cannot be empty")
     return v
 
-class Note(BaseModel):
+class Note(BaseModel):  # note input
     note : Annotated [str | None, AfterValidator(char_min_length), AfterValidator(word_max_length), AfterValidator(empty_note_check)] = None
 
-class Notes(SQLModel, table=True):
+class Notes(SQLModel, table=True):   # note database
     id: int | None = Field(default=None, primary_key=True) 
     note: str     # can be set Field(index=True) for easier filter when using .where()
     time: str 
+    user_id: int | None = Field(default=None, foreign_key="users.username")
+
+class Note_output(BaseModel):
+    id: int
+    note: str
+    time: str
 
 class User(BaseModel):  # for sign-up
     username: str
@@ -39,13 +45,8 @@ class User_login(BaseModel): # for login
     email: str
     password: str
 
-class login_output(BaseModel):
-    email: str
-    password: str
-
 class Users(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True) 
-    user_id: int | None = Field(default=None, foreign_key="notes.id")
-    username: str
-    email: str
+    username: str = Field(index=True)
+    email: str = Field(index=True)
     password: str
