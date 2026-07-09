@@ -1,4 +1,4 @@
-const apiurl = "http://127.0.0.1:8000/notes";
+const apiurl = "https://notaki.onrender.com/notes";
 const token = localStorage.getItem('token');   // get token value from browser localstorage
 
 

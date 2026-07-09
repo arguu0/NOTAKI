@@ -17,7 +17,7 @@ async function register(msg) {
     const form = new FormData(document.getElementById('form_id'));
     const formdata = Object.fromEntries(form);
 
-    const response = await fetch(`http://127.0.0.1:8000/register`, {
+    const response = await fetch(`https://notaki.onrender.com/register`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(formdata)

@@ -10,7 +10,7 @@ document.getElementById('login-btn').addEventListener('click', async (event) => 
         msg.style.display = "block";
     }
     else {
-        const response = await fetch(`http://127.0.0.1:8000/login`, {
+        const response = await fetch(`https://notaki.onrender.com/login`, {
             method: "POST",
             headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
             body: `username=${email}&password=${pwd}`  // using query structure since 0auth2reqform receive like this
