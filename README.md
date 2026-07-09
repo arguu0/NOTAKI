@@ -34,15 +34,17 @@ Notaki/
 │       └── notes.py
 │
 ├── front-end/
-│   ├── signup.html
+│   ├── index.html
 │   ├── login.html
 │   ├── dashboard.html
 │   ├── css/
 │   │   └── style.css
-│   └── js/
-│       ├── register.js
-│       ├── login.js
-│       └── dashboard.js
+│   ├── js/
+│   │   ├── register.js
+│   │   ├── login.js
+│   │   └── dashboard.js
+│   └── favicon/
+│       └── notaki_favicon.png
 │
 ├── requirements.txt
 ├── .env.example
