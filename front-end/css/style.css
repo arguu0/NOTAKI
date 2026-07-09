@@ -358,7 +358,7 @@ header .subtitle {
 }
 
 .form-message {
-    display: none; /* toggle via JS/backend later */
+    display: none; 
     background: rgba(226, 122, 122, 0.1);
     border: 1px solid rgba(226, 122, 122, 0.3);
     color: #e27a7a;
@@ -384,4 +384,22 @@ header .subtitle {
 .auth-footer a:hover {
     color: var(--accent-dim);
     text-decoration: underline;
+}
+
+.btn-logout {
+    font-family: 'Audiowide', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: #e27a7a;
+    background: rgba(226, 75, 74, 0.1);
+    border: 1px solid rgba(226, 75, 74, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background: rgba(226, 75, 74, 0.2);
+    color: #e27a7a;
 }

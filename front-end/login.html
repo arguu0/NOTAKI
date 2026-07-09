@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login — Secure Notes</title>
+    <title>Login — Notaki</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Inter:400,500&display=swap">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/login.js"></script>
 </head>
 <body>
 
 <header>
-    <h1><span class="accent-dot"></span>Note Taking API</h1>
-    <p class="subtitle">FastAPI · SQLite · REST</p>
+    <h1><span class="accent-dot"></span>NOTAKI</h1>
+    <p class="subtitle">FastAPI · SQLModel</p>
 </header>
 
 <main class="auth-wrapper">
@@ -24,21 +25,21 @@
         </div>
 
         <!-- Reserved space for future error messages -->
-        <p class="form-message" id="login-error">
+        <p class="form-message" id="login-msg">
             Invalid username/email or password.
         </p>
 
-        <form>
+        <form id="form_id">
 
             <div class="field-group">
-                <label class="field-label" for="login-identifier">Username or Email</label>
+                <label class="field-label" for="login-email">Email</label>
                 <input
-                    type="text"
-                    id="login-identifier"
-                    name="identifier"
+                    type="email"
+                    id="login-email"
+                    name="email"
                     class="field-input"
                     placeholder="you@example.com"
-                    autocomplete="username">
+                    autocomplete="email">
             </div>
 
             <div class="field-group">
@@ -52,7 +53,7 @@
                     autocomplete="current-password">
             </div>
 
-            <button type="submit" class="btn-accent">Login</button>
+            <button type="button" id="login-btn" class="btn-accent">Login</button>
 
         </form>
 

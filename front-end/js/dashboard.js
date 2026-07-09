@@ -1,24 +1,30 @@
 const apiurl = "http://127.0.0.1:8000/notes";
+const token = localStorage.getItem('token');   // get token value from browser localstorage
+
+
 
 //get input, add note and save in fastapi and display in frontend
 async function get_input() {
+
     const inputField = document.getElementById('note-input');
     const Inputvalue = inputField.value.trim();
     
     try {
         const response = await fetch(apiurl, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${token}`},
             body: JSON.stringify({ note: Inputvalue })
         })
+
         if (!response.ok) {
             const err = await response.json();
-            console.log(err.detail[0].msg);
-            alert(err.detail[0].msg)
+            console.log(err.detail);
+            alert(err.detail)
         }
+
         inputField.value = '';
-        await fetch_url()
-        
+        await fetch_url();
+
     } catch (error) {
         console.error(error);
         alert("Could not reach server.");
@@ -26,16 +32,39 @@ async function get_input() {
 };
 document.getElementById('save-btn').addEventListener('click', get_input);
 
+
+
+
 //fetch note
 async function fetch_url() {
-    const response = await fetch(apiurl);
-    const data = await response.json();
-    
-    let innertext = data.length > 1 ? `${data.length} Notes` : `${data.length} Note`;  //display the number of notes
 
-    document.getElementById('note-count').innerText = innertext;
-    show_note(data);  // call display note
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const response = await fetch(apiurl, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json', 
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        alert(data.detail);
+    } else {
+        let innertext = data.length > 1 ? `${data.length} Notes` : `${data.length} Note`;  //display the number of notes
+
+        document.getElementById('note-count').innerText = innertext;
+        show_note(data);  // call display note
+    }
 }
+
+
+
 
 //display note
 function show_note(notes) {
@@ -60,28 +89,39 @@ function show_note(notes) {
     </div>`).join('');
 }
 
+
+
+
 //display all note after reload / at start
 window.addEventListener('DOMContentLoaded', () => {
     fetch_url();
 });
 
+
+
+
 //delete notes
 async function delete_item(event) {
+
     if (event.target.classList.contains('btn-delete')) { 
         const payload = event.target.dataset.id;
         await fetch(`${apiurl}/${payload}`, {
             method: 'DELETE',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${token}`},
             body: JSON.stringify({id : payload})
         })
+
         await fetch_url();
     }
 };
 document.addEventListener('click', delete_item)
 
 
+
+
 //edit note -- change edit btn to "save"
 async function edit_to_save(id) {
+
     const container = document.getElementById(`static-text_${id}`);
     const exist_text = container.innerHTML;
     const word = exist_text.split(/\s+/);  // for word.length -> display word count
@@ -94,35 +134,46 @@ async function edit_to_save(id) {
         <div class="note-actions">
             <button class="btn-edit" onclick="save_change(${id})">Save</button>
         </div>`;
+
     attach_word_counter(`note-input_${id}`, `counter_${id}`);
 };
 
+
+
+
 //save the note
 async function save_change(id) {
+
     const updatedText = document.getElementById(`note-input_${id}`).value.trim();
     
     try {
         const response = await fetch(`${apiurl}/${id}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json', "Authorization": `Bearer ${token}`},
             body: JSON.stringify({ id: id ,note : updatedText })
         })
 
         if (!response.ok) {
             const err = await response.json();
-            console.log(err.detail[0].msg);
-            alert(err.detail[0].msg)
+            alert(err.detail)
         }
+
         await fetch_url();
+
     } catch (error){
         console.error(error);
         alert("Could not reach server.");
     }
 };
 
+
+
+
 // word counter
 attach_word_counter('note-input', 'counter');
+
 function attach_word_counter(inputId, counterId) {
+
     const input = document.getElementById(inputId);
     const counter = document.getElementById(counterId);
 
@@ -152,3 +203,12 @@ function attach_word_counter(inputId, counterId) {
         }
     });
 }
+
+
+
+
+// delete token after log out
+document.getElementById('btn-logout').addEventListener('click', async () => {
+    localStorage.removeItem('token');
+    window.location.href = 'login.html';
+})

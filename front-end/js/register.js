@@ -1,0 +1,44 @@
+document.getElementById('register-btn').addEventListener('click', async (event) => {
+    event.preventDefault();    
+    
+    const pwd = document.getElementById('signup-password').value;
+    const confirm_pwd = document.getElementById('signup-confirm-password').value;
+    const msg = document.getElementById('signup-msg'); 
+
+    if (pwd !== confirm_pwd) {
+        msg.style.display = "block";
+        msg.innerHTML = "Passwords do not match. Please try again."
+    } else {
+        await register(msg);
+    }
+})
+
+async function register(msg) {
+    const form = new FormData(document.getElementById('form_id'));
+    const formdata = Object.fromEntries(form);
+
+    const response = await fetch(`http://127.0.0.1:8000/register`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(formdata)
+    })
+    const data = await response.json();
+    if (!response.ok) {
+        msg.style.display = "block";
+        msg.innerHTML = data.detail;
+    } else {
+        msg.innerHTML = data;
+        msg.style.color = "#84e27a";
+        msg.style.background = "rgba(122, 226, 122, 0.1)";
+        msg.style.border = "1px solid rgba(122, 226, 122, 0.3)";
+        msg.style.display = "block";
+        setTimeout(() => {
+            msg.style.color = "#e27a7a";
+            msg.style.background = "rgba(226, 122, 122, 0.1)";
+            msg.style.border = "1px solid rgba(226, 122, 122, 0.3)";
+            msg.style.display = "none";
+        }, 3000);
+    }
+}
+
+

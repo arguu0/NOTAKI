@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Sign Up — Secure Notes</title>
+    <title>Sign Up — Notaki</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Inter:400,500&display=swap">
-    <link rel="stylesheet" href="style.css">
-    <script defer src="register.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/register.js"></script>
 </head>
 <body>
 
 <header>
-    <h1><span class="accent-dot"></span>Note Taking API</h1>
-    <p class="subtitle">FastAPI · SQLite · REST</p>
+    <h1><span class="accent-dot"></span>NOTAKI</h1>
+    <p class="subtitle">FastAPI · SQLModel</p>
 </header>
 
 <main class="auth-wrapper">
@@ -25,8 +25,8 @@
         </div>
 
         <!-- Reserved space for future validation/error messages -->
-        <div class="form-message" id="signup-error">
-            <!-- Error display here -->
+        <div class="form-message" id="signup-msg">
+            <!-- Error or Validation Msg display here -->
         </div>
 
         <form id="form_id">
@@ -74,8 +74,8 @@
                     placeholder="••••••••"
                     autocomplete="new-password">
             </div>
-
-            <button type="submit" class="btn-accent" id="register-btn">Create Account</button>
+            
+            <button type="button" class="btn-accent" id="register-btn">Create Account</button>
 
         </form>
 
