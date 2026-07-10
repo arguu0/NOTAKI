@@ -42,7 +42,7 @@ async function register(msg) {
 }
 
 
-addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const loading = document.getElementById("loading")
     const main = document.getElementById("main")
 
