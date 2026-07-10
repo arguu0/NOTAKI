@@ -42,3 +42,17 @@ async function register(msg) {
 }
 
 
+addEventListener('DOMContentLoaded', async () => {
+    const loading = document.getElementById("loading")
+    const main = document.getElementById("main")
+
+    try {
+        const response = await fetch ("https://notaki.onrender.com/starter")
+        if (response.ok) {
+            loading.style.display = "none";
+            main.style.display = "block";
+        }
+    } catch(error) {
+        loading.innerHTML = `<h2 style="font-family: 'Audiowide', sans-serif;">Server Unavailable, Please Try Again Later.</h2>`;
+    }
+})

@@ -18,17 +18,20 @@
 </header>
 
 <main class="auth-wrapper">
-    <div class="auth-card">
+
+    <div class="d-flex align-items-center gap-2" id="loading">
+        <div class="spinner-border"></div>
+        <span class="fs-2" style="font-family: 'Audiowide', sans-serif;">Please Wait A Moment...</span>
+    </div>
+
+    <div class="auth-card d-none" id="main">
 
         <div class="auth-card-header">
             <h2>Create Account</h2>
             <p>Sign up to start saving your notes</p>
         </div>
 
-        <!-- Reserved space for future validation/error messages -->
-        <div class="form-message" id="signup-msg">
-            <!-- Error or Validation Msg display here -->
-        </div>
+        <div class="form-message" id="signup-msg"></div>
 
         <form id="form_id">
 
