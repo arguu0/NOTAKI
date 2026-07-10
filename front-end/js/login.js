@@ -30,3 +30,19 @@ document.getElementById('login-btn').addEventListener('click', async (event) => 
 function access_dashboard() {
     window.location.href = "dashboard.html";
 }
+
+// Backend starter if not started yet
+document.addEventListener('DOMContentLoaded', async () => {
+    const loading = document.getElementById("loading")
+    const main = document.getElementById("main")
+
+    try {
+        const response = await fetch ("https://notaki.onrender.com/starter")
+        if (response.ok) {
+            loading.classList.add("d-none");
+            main.classList.remove("d-none");
+        }
+    } catch(error) {
+        loading.innerHTML = `<h2 style="font-family: 'Audiowide', sans-serif;">Server Unavailable, Please Try Again Later.</h2>`;
+    }
+})

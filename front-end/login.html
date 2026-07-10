@@ -18,17 +18,21 @@
 </header>
 
 <main class="auth-wrapper">
-    <div class="auth-card">
+
+    <div class="d-flex align-items-center gap-2" id="loading">
+        <div class="spinner-border"></div>
+        <span class="fs-2" style="font-family: 'Audiowide', sans-serif;">Please Wait A Moment...</span>
+    </div>
+
+    <div class="auth-card d-none" id="main">
 
         <div class="auth-card-header">
             <h2>Welcome Back</h2>
             <p>Log in to access your notes</p>
         </div>
 
-        <!-- Reserved space for future error messages -->
-        <p class="form-message" id="login-msg">
-            Invalid username/email or password.
-        </p>
+
+        <p class="form-message" id="login-msg"></p>
 
         <form id="form_id">
 
