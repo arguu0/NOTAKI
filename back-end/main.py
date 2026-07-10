@@ -24,3 +24,7 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(notes.router)
+
+@app.get("/starter")
+def starting_backend():
+    return {"status": "ok"}
